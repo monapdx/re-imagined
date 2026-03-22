@@ -37,7 +37,7 @@ padding: v 10 h 16
 ^ padding: l 20
 ```
 
-normalizes to:
+**normalizes to:**
 
 ```txt
 padding: v 10 l 20 r 16
@@ -74,7 +74,7 @@ When labels are present, order does not matter.
 padding: h 16 v 10
 ```
 
-means the same thing as:
+**means the same thing as:**
 
 ```txt
 padding: v 10 h 16
@@ -84,7 +84,7 @@ padding: v 10 h 16
 
 A single declaration cannot define the same underlying target twice.
 
-Invalid:
+**Invalid:**
 
 ```txt
 padding: h 16 l 20
@@ -96,14 +96,14 @@ because `h` already includes `l`.
 
 The language prefers the shortest form that is still clear.
 
-Preferred:
+**Preferred:**
 
 ```txt
 padding: v 10 h 16
 corner-radius: t 15 b 10
 ```
 
-Valid but less preferred:
+**Valid but less preferred:**
 
 ```txt
 padding: t 10 r 16 b 10 l 16
@@ -131,7 +131,7 @@ padding: v 10 h 16
 ^ padding: l 20 r 25
 ```
 
-becomes:
+**becomes:**
 
 ```txt
 padding: v 10 l 20 r 25
@@ -139,37 +139,37 @@ padding: v 10 l 20 r 25
 
 ### 7. Simplify only when clarity is preserved
 
-Good simplification:
+**Good simplification:**
 
 ```txt
 padding: t 10 r 10 b 10 l 10
 ```
 
-becomes:
+**becomes:**
 
 ```txt
 padding: 10
 ```
 
-Good simplification:
+**Good simplification:**
 
 ```txt
 padding: t 10 r 16 b 10 l 16
 ```
 
-becomes:
+**becomes:**
 
 ```txt
 padding: v 10 h 16
 ```
 
-Bad simplification:
+**Bad simplification:**
 
 ```txt
 corner-radius: t 15 b 10
 ```
 
-should **not** become:
+**should **not** become:**
 
 ```txt
 corner-radius: 15 10
@@ -185,7 +185,7 @@ padding: v 10 h 16
 ^ padding: r 25
 ```
 
-Final visible result:
+**Final visible result:**
 
 ```txt
 padding: v 10 l 20 r 25
