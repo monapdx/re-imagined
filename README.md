@@ -218,6 +218,44 @@ padding: v 10 h 16
 ^ padding: l 20
 ```
 
+means all those numbers are in px.
+
+**Then if later:**
+
+```
+unit: rem
+padding: 2
+```
+
+that new padding is in rem.
+
+### 11. Unit Context
+
+A unit declaration establishes the active numeric unit for all following numeric declarations until another unit declaration overrides it.
+
+**Example:**
+
+```
+unit: px
+padding: v 10 h 16
+corner-radius: t 12 b 6
+```
+
+```
+unit: rem
+padding: 2
+```
+### Unit Rules
+
+- Numeric declarations MUST use the current active unit.
+- Mixed units within a declaration are not allowed.
+- A new unit declaration replaces the previous unit context for subsequent lines.
+- Refinements inherit the active unit context of their position in the document.
+
+- Units are declared separately
+- A unit declaration stays in effect until another one appears later
+- That means a property and its refinements should stay within one unit context
+
 ## Example Flow
 
 ```txt
