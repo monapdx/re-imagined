@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from typing import Dict, List
 import re
 
 
@@ -16,7 +16,6 @@ PROPERTY_TARGETS = {
             "h": {"l", "r"},
         },
         "specific": {"t", "r", "b", "l"},
-        "aliases": {},
     },
     "corner-radius": {
         "groups": {
@@ -26,7 +25,6 @@ PROPERTY_TARGETS = {
             "r": {"tr", "br"},
         },
         "specific": {"tl", "tr", "br", "bl"},
-        "aliases": {},
     },
 }
 
@@ -39,19 +37,6 @@ class ParsedLine:
 
 
 class ReImaginedParser:
-    """Tiny prototype for the re:imagined styling language.
-
-    Supported features:
-    - declarations: property: value
-    - refinements: ^ property: value
-    - visible normalization to a canonical string
-    - simplification when clarity is preserved
-
-    Supported properties in this prototype:
-    - padding
-    - corner-radius
-    """
-
     def __init__(self) -> None:
         self.state: Dict[str, Dict[str, int]] = {}
 
@@ -61,9 +46,11 @@ class ReImaginedParser:
             line = raw_line.strip()
             if not line or line.startswith("#"):
                 continue
+
             parsed = self.parse_line(line)
             canonical = self.apply(parsed)
             outputs[parsed.property_name] = canonical
+
         return outputs
 
     def parse_line(self, line: str) -> ParsedLine:
@@ -77,39 +64,33 @@ class ReImaginedParser:
             raise ReImaginedError(f"Invalid syntax: {line}")
 
         property_name, raw_value = match.groups()
+
         if property_name not in PROPERTY_TARGETS:
-            suggestions = self.suggest_property(property_name)
-            if suggestions:
-                raise ReImaginedError(
-                    f"Unknown property '{property_name}'. Did you mean '{suggestions[0]}'?"
-                )
             raise ReImaginedError(f"Unknown property '{property_name}'.")
 
-        return ParsedLine(refine=refine, property_name=property_name, raw_value=raw_value)
+        return ParsedLine(refine, property_name, raw_value)
 
     def apply(self, parsed: ParsedLine) -> str:
         config = PROPERTY_TARGETS[parsed.property_name]
-        specific_targets = set(config["specific"])
-        groups = config["groups"]
+        specific_targets = config["specific"]
 
-        parsed_assignments = self.parse_value(parsed.property_name, parsed.raw_value)
+        assignments = self.parse_value(parsed.property_name, parsed.raw_value)
 
         if parsed.refine:
             if parsed.property_name not in self.state:
                 raise ReImaginedError(
-                    f"Cannot refine '{parsed.property_name}' before it has been declared."
+                    f"Cannot refine '{parsed.property_name}' before declaration."
                 )
             current = dict(self.state[parsed.property_name])
-            current.update(parsed_assignments)
+            current.update(assignments)
             resolved = current
         else:
-            resolved = parsed_assignments
+            resolved = assignments
 
-        # Ensure complete property state
         if set(resolved.keys()) != specific_targets:
-            missing = sorted(specific_targets - set(resolved.keys()))
+            missing = specific_targets - set(resolved.keys())
             raise ReImaginedError(
-                f"Property '{parsed.property_name}' is incomplete. Missing: {', '.join(missing)}."
+                f"Incomplete '{parsed.property_name}', missing: {missing}"
             )
 
         self.state[parsed.property_name] = resolved
@@ -118,48 +99,38 @@ class ReImaginedParser:
     def parse_value(self, property_name: str, raw_value: str) -> Dict[str, int]:
         config = PROPERTY_TARGETS[property_name]
         groups = config["groups"]
-        specific = set(config["specific"])
+        specific = config["specific"]
 
         tokens = raw_value.split()
-        if not tokens:
-            raise ReImaginedError(f"Missing value for '{property_name}'.")
 
-        # Single-value shorthand only when unambiguous.
         if len(tokens) == 1:
-            value = self.parse_int(tokens[0])
-            return {target: value for target in specific}
+            value = int(tokens[0])
+            return {t: value for t in specific}
 
-        # Reject unlabeled positional shorthand in this prototype.
-        if self.looks_like_all_numbers(tokens):
-            raise ReImaginedError(
-                f"Unlabeled multi-value shorthand is not allowed for '{property_name}' in this prototype. Use labels."
-            )
+        if all(token.isdigit() for token in tokens):
+            raise ReImaginedError("Unlabeled multi-value shorthand not allowed.")
 
         assignments: Dict[str, int] = {}
+
         i = 0
         while i < len(tokens):
             label = tokens[i]
-            if i + 1 >= len(tokens):
-                raise ReImaginedError(f"Missing numeric value after label '{label}'.")
-            value = self.parse_int(tokens[i + 1])
+            value = int(tokens[i + 1])
 
             if label in groups:
-                expanded = groups[label]
+                targets = groups[label]
             elif label in specific:
-                expanded = {label}
+                targets = {label}
             else:
-                raise ReImaginedError(
-                    f"Unknown label '{label}' for property '{property_name}'."
-                )
+                raise ReImaginedError(f"Unknown label '{label}'")
 
-            overlap = expanded & set(assignments.keys())
+            overlap = set(assignments.keys()) & targets
             if overlap:
-                raise ReImaginedError(
-                    f"Overlapping definition in '{property_name}': label '{label}' conflicts with {', '.join(sorted(overlap))}."
-                )
+                raise ReImaginedError(f"Overlap detected: {overlap}")
 
-            for target in expanded:
-                assignments[target] = value
+            for t in targets:
+                assignments[t] = value
+
             i += 2
 
         return assignments
@@ -168,33 +139,35 @@ class ReImaginedParser:
         if property_name == "padding":
             return self.canonical_padding(resolved)
         if property_name == "corner-radius":
-            return self.canonical_corner_radius(resolved)
-        raise ReImaginedError(f"No canonicalizer for '{property_name}'.")
+            return self.canonical_corner(resolved)
 
-    def canonical_padding(self, resolved: Dict[str, int]) -> str:
-        t, r, b, l = resolved["t"], resolved["r"], resolved["b"], resolved["l"]
+        raise ReImaginedError("No canonical form.")
 
-        if t == r == b == l:
+    def canonical_padding(self, r: Dict[str, int]) -> str:
+        t, rgt, b, l = r["t"], r["r"], r["b"], r["l"]
+
+        if t == rgt == b == l:
             return f"padding: {t}"
 
-        if t == b and l == r:
+        if t == b and l == rgt:
             return f"padding: v {t} h {l}"
 
-        parts: List[str] = []
-        if t == b:
-            parts.extend(["v", str(t)])
-        else:
-            parts.extend(["t", str(t), "b", str(b)])
+        parts = []
 
-        if l == r:
-            parts.extend(["h", str(l)])
+        if t == b:
+            parts += ["v", str(t)]
         else:
-            parts.extend(["l", str(l), "r", str(r)])
+            parts += ["t", str(t), "b", str(b)]
+
+        if l == rgt:
+            parts += ["h", str(l)]
+        else:
+            parts += ["l", str(l), "r", str(rgt)]
 
         return "padding: " + " ".join(parts)
 
-    def canonical_corner_radius(self, resolved: Dict[str, int]) -> str:
-        tl, tr, br, bl = resolved["tl"], resolved["tr"], resolved["br"], resolved["bl"]
+    def canonical_corner(self, r: Dict[str, int]) -> str:
+        tl, tr, br, bl = r["tl"], r["tr"], r["br"], r["bl"]
 
         if tl == tr == br == bl:
             return f"corner-radius: {tl}"
@@ -205,34 +178,14 @@ class ReImaginedParser:
         if tl == bl and tr == br:
             return f"corner-radius: l {tl} r {tr}"
 
-        parts = [
-            "tl", str(tl),
-            "tr", str(tr),
-            "br", str(br),
-            "bl", str(bl),
-        ]
-        return "corner-radius: " + " ".join(parts)
-
-    @staticmethod
-    def parse_int(token: str) -> int:
-        if not re.fullmatch(r"-?\d+", token):
-            raise ReImaginedError(f"Expected integer value, got '{token}'.")
-        return int(token)
-
-    @staticmethod
-    def looks_like_all_numbers(tokens: List[str]) -> bool:
-        return all(re.fullmatch(r"-?\d+", token) for token in tokens)
-
-    @staticmethod
-    def suggest_property(name: str) -> List[str]:
-        possibilities = list(PROPERTY_TARGETS.keys())
-        return [p for p in possibilities if p.startswith(name[:3])][:1]
+        return f"corner-radius: tl {tl} tr {tr} br {br} bl {bl}"
 
 
-def demo() -> None:
+# --- demo ---
+if __name__ == "__main__":
     parser = ReImaginedParser()
 
-    source = """
+    code = """
     padding: v 10 h 16
     ^ padding: l 20
     ^ padding: r 25
@@ -241,14 +194,8 @@ def demo() -> None:
     ^ corner-radius: tl 20 tr 20
     """
 
-    print("SOURCE:\n")
-    print(source.strip())
-    print("\nNORMALIZED OUTPUT:\n")
+    result = parser.run(code)
 
-    outputs = parser.run(source)
-    for property_name, canonical in outputs.items():
-        print(canonical)
-
-
-if __name__ == "__main__":
-    demo()
+    print("\n--- OUTPUT ---\n")
+    for line in result.values():
+        print(line)
