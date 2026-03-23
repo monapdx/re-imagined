@@ -177,6 +177,47 @@ corner-radius: 15 10
 
 because that would hide meaning behind positional convention.
 
+### 8. No mixed units inside values
+
+**So this is invalid:**
+
+```
+padding: v 10px h 5%
+```
+Because a declaration cannot mix unit systems.
+
+### 9. Units are declared separately and persist downward
+
+So units behave like a current measurement context for the lines that follow.
+
+**Example:**
+
+```
+unit: px
+padding: v 10 h 16
+corner-radius: t 12 b 6
+
+unit: %
+width: 50
+height: 25
+```
+**This would mean:**
+
+the first group uses px
+then unit: % changes the default for everything after it
+
+### 10. Interpretation rule
+
+Every numeric value after that uses the current unit unless and until another unit declaration appears.
+
+So:
+
+```
+unit: px
+padding: v 10 h 16
+^ padding: l 20
+```
+
 ## Example Flow
 
 ```txt
