@@ -1,6 +1,6 @@
 # re:imagined
 
-<img src="https://raw.githubusercontent.com/monapdx/re-imagined/refs/heads/main/logo.png?token=GHSAT0AAAAAADVN2OWESUXNK7GP52LEQMMK2O3F6KQ" width="737">
+<img src="https://raw.githubusercontent.com/monapdx/re-imagined/refs/heads/main/logo.png" width="737">
 
 **A human-centered styling language built around visible meaning, explicit refinement, and self-normalizing structure.**
 
