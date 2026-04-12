@@ -240,7 +240,7 @@ Because you *cannot maximize all of these at once*.
 
 **re:imagined** is a tiny styling language concept that prioritizes readability over memorized positional shorthand.
 
-[![SPEC](https://img.shields.io/badge/SPEC-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/SPEC.md) [![PARSER](https://img.shields.io/badge/PARSER-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/blob/main/parser-prototype.py)
+[![SPEC](https://img.shields.io/badge/SPEC-1f6feb?style=for-the-badge)](SPEC.md) [![PARSER](https://img.shields.io/badge/PARSER-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/blob/main/parser-prototype.py)
 
 **Its core ideas are:**
 
