@@ -1,5 +1,7 @@
 # re:imagined
 
+<img src="https://raw.githubusercontent.com/monapdx/re-imagined/refs/heads/main/logo.png?token=GHSAT0AAAAAADVN2OWESUXNK7GP52LEQMMK2O3F6KQ" width="737">
+
 **A human-centered styling language built around visible meaning, explicit refinement, and self-normalizing structure.**
 
 [![SPEC](https://img.shields.io/badge/SPEC-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/SPEC.md) [![PARSER](https://img.shields.io/badge/PARSER-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/blob/main/parser-prototype.py)
