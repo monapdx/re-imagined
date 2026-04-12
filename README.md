@@ -2,6 +2,234 @@
 
 **A human-centered styling language built around visible meaning, explicit refinement, and self-normalizing structure.**
 
+## Initial Prompt:
+```
+How does one go about writing a new programming language, exactly?
+```
+## Refinement:
+```
+Could you make real examples of those types of decisions, but make them understandable to a non-coder (like me) by finding comparable examples if I were making an actual spoken or written language and ask me what rule I'd choose and then tell me the pros and cons
+```
+
+## 1. **Word Order (Syntax Rules)**
+
+You’re designing a language. How should sentences be structured?
+
+<details>
+<summary>Option A</summary>
+
+“I eat apples.”
+</details>
+<details>
+<summary>Option B</summary>
+
+“Apples eat I.”
+
+</details>
+<details>
+<summary>Option C</summary>
+
+“Eat I apples.”
+
+</details>
+
+## 2. **Do You Require Subjects? (Explicitness vs Assumption)**
+
+Should people always say who is doing something?
+
+<details>
+<summary>Option A</summary>
+
+“I am going to the store.”
+
+</details>
+<details>
+<summary>Option B</summary>
+
+“Going to the store.” (subject implied)
+
+</details>
+
+## 3. **Strict vs Flexible Meaning (Typing Systems)**
+
+**If someone says:**
+
+> “The idea is heavy.”
+
+Do you allow that?
+
+<details>
+<summary>Option A</summary>
+
+Only literal meanings allowed (“heavy” must be physical)
+
+</details>
+<details>
+<summary>Option B</summary>
+
+Metaphors allowed (“heavy” can mean emotionally serious)
+
+</details>
+
+## 4. **Grammar Enforcement (Errors vs Tolerance)**
+
+**If someone says:**
+
+> “Me go store yesterday.”
+
+<details>
+<summary>Option A</summary>
+
+Reject it as incorrect
+
+</details>
+<details>
+<summary>Option B</summary>
+
+Accept it if meaning is clear
+
+</details>
+
+## 5. **Word Creation Rules (Extensibility / Abstraction)**
+
+Can people invent new words?
+
+**Example:**
+
+> “unhappiness”
+> “hyper-communicative”
+
+<details>
+<summary>Option A</summary>
+
+Fixed vocabulary only
+
+</details>
+<details>
+<summary>Option B</summary>
+
+Allow combining words freely
+
+</details>
+
+## 6. **Ambiguity vs Precision**
+
+**If someone says:**
+
+> “They saw her duck.”
+
+Do you allow ambiguity?
+
+<details>
+<summary>Option A</summary>
+
+Every sentence must have only one meaning
+
+</details>
+<details>
+<summary>Option B</summary>
+
+Ambiguity is acceptable
+
+</details>
+
+## 7. **How Memory Works (Pronouns / References)**
+
+**You say:**
+
+> “Sarah told Jane that she was late.”
+
+Who is “she”?
+
+<details>
+<summary>Option A</summary>
+
+Must always be explicit
+
+</details>
+<details>
+<summary>Option B</summary>
+
+Context decides
+
+</details>
+
+## 8. **Error Handling (What happens when things go wrong?)**
+
+**If someone says something nonsensical:**
+
+> “The moon divided by banana equals sadness.”
+
+**Do you:**
+
+<details>
+<summary>Option A</summary>
+
+Stop the conversation immediately
+
+</details>
+<details>
+<summary>Option B</summary>
+
+Try to interpret anyway
+
+</details>
+
+## 9. **Formality Level (Boilerplate vs Simplicity)**
+
+**Do people have to speak formally like:**
+
+> “I would like to request that you pass the salt.”
+
+**or casually:**
+
+> “Pass the salt.”
+
+<details>
+<summary>Option A</summary>
+
+Formal
+
+</details>
+<details>
+<summary>Option B</summary>
+
+Casual
+
+</details>
+
+## 10. **Rules vs Philosophy (The Deep One You Noticed)**
+
+This is the real heart of it.
+
+**Are you designing a language that values:**
+
+- precision?
+- beauty?
+- speed?
+- accessibility?
+- power?
+- safety?
+
+Because you *cannot maximize all of these at once*.
+
+---
+
+## My Choices
+
+1. Option A
+2. Option B will always reduce confusion or remove ambiguity, but may not always be expected in informal or casual contexts. Ideally both would be tolerated.
+3. Yes, it should be allowed...but it *does* benefit everyone if there is a way to indicate intended meaning.
+4. This one is really tough if I were actually making a language to speak/write. My instinct is to go with option A because "Me go to store yesterday" is glaringly incorrect English. However, it may not always be practical to expect people learning as a second language to speak perfectly. **Option A** should be corect and B **should be discouraged**.
+5. There should be **some rules** on the conventions for creating new words. I would argue that "unhappiness" is already an established English word with clear meaning. Something like "dishappiness" would be much stranger to encounter and is not generally used or accepted, as far as I know...I'm fine with hyper-communicative because it uses the hyphen correctly in my view of things, but we can't just join any two words by using one either. This one is very messy and complicated.
+6. Honestly, the example sentence here doesn't seem ambiguous to me...it does assume the listener already understands and knows who is meant by "her" which would imply being mid-conversation. It's unlikely a sentence like this is blurted out randomly without context. I'd say it's acceptable. I'm not sure how many other meanings "They saw her duck" could have.
+7. My instinct is that "her" means Jane. If it were Sarah, it would be "Sarah told Jane that she had been late. I saw **Option B** wins here.
+8. Option A
+9. This depends entirely on the situation, participants and social expectations. Formal and informal speech are just as valid and real as the other.
+10. I would prioritize: power, accessibility and speed
+
+---
+
 ## Overview
 
 **re:imagined** is a tiny styling language concept that prioritizes readability over memorized positional shorthand.
