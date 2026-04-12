@@ -4,7 +4,7 @@
 
 **A human-centered styling language built around visible meaning, explicit refinement, and self-normalizing structure.**
 
-[![SPEC](https://img.shields.io/badge/SPEC-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/SPEC.md) [![PARSER](https://img.shields.io/badge/PARSER-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/blob/main/parser-prototype.py)
+[![SPEC](https://img.shields.io/badge/SPEC-1f6feb?style=for-the-badge)](SPEC.md) [![PARSER](https://img.shields.io/badge/PARSER-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/blob/main/parser-prototype.py)
 
 ## Initial Prompt:
 ```
