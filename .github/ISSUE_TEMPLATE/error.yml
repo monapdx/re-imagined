@@ -1,0 +1,22 @@
+name: "Submit an Error"
+description: "Please submit a bug report if you encountered an error when working with this."
+title: "[Error]"
+labels:
+  - "errors"
+body:
+- type: input
+  id: bug
+  attributes:
+    label: "Bug"
+    description: "What error did you encounter?"
+    placeholder: "Conflict described"
+  validations:
+    required: true
+- type: textarea
+  id: info
+  attributes:
+    label: "Additional info"
+    description: "Anything else we should know?"
+    placeholder: "Notes go here."
+  validations:
+    required: true
