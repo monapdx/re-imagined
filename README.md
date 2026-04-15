@@ -4,7 +4,7 @@
 
 **A human-centered styling language built around visible meaning, explicit refinement, and self-normalizing structure.**
 
-[![SPEC](https://img.shields.io/badge/SPEC-1f6feb?style=for-the-badge)](SPEC.md) [![PARSER](https://img.shields.io/badge/PARSER-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/blob/main/parser-prototype.py) [![APPROACHES](https://img.shields.io/badge/APPROACHES-1f6feb?style=for-the-badge)](APPROACHES.md)
+[![SPEC](https://img.shields.io/badge/SPEC-1f6feb?style=for-the-badge)](SPEC.md) [![PARSER](https://img.shields.io/badge/PARSER-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/blob/main/parser-prototype.py) [![APPROACHES](https://img.shields.io/badge/APPROACHES-1f6feb?style=for-the-badge)](APPROACHES.md) [![Syntax](https://img.shields.io/badge/Syntax-1f6feb?style=for-the-badge)](#core-syntax) [![Labels](https://img.shields.io/badge/Labels-1f6feb?style=for-the-badge)](#labels) [![Rules](https://img.shields.io/badge/Rules-1f6feb?style=for-the-badge)](#rules)
 
 ## Initial Prompt:
 ```
@@ -240,7 +240,7 @@ Because you *cannot maximize all of these at once*.
 
 **re:imagined** is a tiny styling language concept that prioritizes readability over memorized positional shorthand.
 
-[![SPEC](https://img.shields.io/badge/SPEC-1f6feb?style=for-the-badge)](SPEC.md) [![PARSER](https://img.shields.io/badge/PARSER-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/blob/main/parser-prototype.py) [![APPROACHES](https://img.shields.io/badge/APPROACHES-1f6feb?style=for-the-badge)](APPROACHES.md)
+[![SPEC](https://img.shields.io/badge/SPEC-1f6feb?style=for-the-badge)](SPEC.md) [![PARSER](https://img.shields.io/badge/PARSER-1f6feb?style=for-the-badge)](https://github.com/monapdx/re-imagined/blob/main/parser-prototype.py) [![APPROACHES](https://img.shields.io/badge/APPROACHES-1f6feb?style=for-the-badge)](APPROACHES.md) [![Syntax](https://img.shields.io/badge/Syntax-1f6feb?style=for-the-badge)](#core-syntax) [![Labels](https://img.shields.io/badge/Labels-1f6feb?style=for-the-badge)](#labels) [![Rules](https://img.shields.io/badge/Rules-1f6feb?style=for-the-badge)](#rules)
 
 **Its core ideas are:**
 
