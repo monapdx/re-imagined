@@ -1,4 +1,4 @@
-name: "Submit an Error"
+name: "🚨 Submit an Error"
 description: "Please submit a bug report if you encountered an error when working with this."
 title: "[Error]"
 labels:
