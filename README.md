@@ -15,7 +15,7 @@ How does one go about writing a new programming language, exactly?
 Could you make real examples of those types of decisions, but make them understandable to a non-coder (like me) by finding comparable examples if I were making an actual spoken or written language and ask me what rule I'd choose and then tell me the pros and cons
 ```
 
-[Read the full conversation here](https://chatgpt.com/share/69db2cae-ab50-83e8-92b3-71ba0aa12cfa)
+[![Read the full conversation](https://img.shields.io/badge/%F0%9F%92%ACRead%20the%20full%20conversation-1f6feb?style=for-the-badge)](https://chatgpt.com/share/69db2cae-ab50-83e8-92b3-71ba0aa12cfa)
 
 ## 1. **Word Order (Syntax Rules)**
 
